@@ -68,6 +68,7 @@ public class FPSController : MonoBehaviour
     private float headBobTimer = 0f;
     private float footstepTimer = 0f;
     private bool isGrounded;
+    private bool isHidden = false;
 
     void Start()
     {
@@ -366,5 +367,18 @@ public class FPSController : MonoBehaviour
     public void ToggleHeadBob(bool enabled)
     {
         enableHeadBob = enabled;
+    }
+    public void SetHidden(bool hidden)
+    {
+        isHidden = hidden;
+
+        // Desactivar movimiento y mirar alrededor si está oculto
+        if (controller) controller.enabled = !hidden;
+        if (playerCamera) playerCamera.enabled = true; // mantenla activa para ver desde dentro
+    }
+
+    public bool IsHidden()
+    {
+        return isHidden;
     }
 }
